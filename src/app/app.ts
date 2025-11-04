@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { Daughter } from "./Counter/daughter/daughter";
 import { Store } from '@ngrx/store';
-import { increment } from './Counter/counter.actions';
-import { decrement } from './Counter/counter.actions';
+import { AppState } from './app.reducer';
+import * as actions from './Counter/counter.actions';
+
 // import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -16,7 +17,7 @@ export class App {
   // protected readonly title = signal('counter-app-without-redux');
   counter!: number;
 
-  constructor(private store: Store<{counter: number}>) {
+  constructor(private store: Store<AppState>) {
     // this.counter= 20;
     this.store.subscribe((state) => {
       this.counter = state.counter;
@@ -25,11 +26,11 @@ export class App {
 
   increase (): void {
     // this.counter = this.counter + 1;
-    this.store.dispatch(increment());
+    this.store.dispatch(actions.increment());
   }
 
   decrease (): void {
     // this.counter = this.counter - 1;
-    this.store.dispatch(decrement());
+    this.store.dispatch(actions.decrement());
   }
 }
