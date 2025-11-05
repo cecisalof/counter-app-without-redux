@@ -1,27 +1,32 @@
-import { Component, signal } from '@angular/core';
-import { Daughter } from "./Counter/daughter/daughter";
+import { Component, OnInit } from '@angular/core';
+// import { Daughter } from "./Counter/daughter/daughter";
 import { Store } from '@ngrx/store';
 import { AppState } from './app.reducer';
 import * as actions from './Counter/counter.actions';
-
-// import { RouterOutlet } from '@angular/router';
+import { selectCounter } from './Counter/counter.selectors';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  // imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  // imports: [Daughter]
+  standalone: true,
+  imports: [CommonModule]
 })
-export class App {
-  // protected readonly title = signal('counter-app-without-redux');
-  counter!: number;
 
+export class App implements OnInit{
+  //Usamos un Observable tipado para la reactividad
+  counter$!: Observable<number>;
+  // AppState interface is passed to the store in the constructor to inicialized app state.
   constructor(private store: Store<AppState>) {
     // this.counter= 20;
-    this.store.subscribe((state) => {
-      this.counter = state.counter;
-    })
+    // this.store.select('counter).subscribe((counter) => {
+    //   this.counter = counter;
+    // })
+  }
+  ngOnInit(): void {
+    this.counter$ = this.store.select(selectCounter)
   }
 
   increase (): void {
