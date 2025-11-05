@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore({
-      counter: counterReducer
+      counter: counterReducer //Se importa de counter.reducer
     })
   ]
 };
