@@ -1,13 +1,13 @@
 <div class="row" style="text-align: center;">
     <div class="col">
         <h1>Counter (Grand Daughter)</h1>
-        <h1>{{counter}}</h1>
+        <h1>{{counter$ | async}}</h1>
     </div>
 </div>
 
 <div class="row" style="text-align: center;">
     <div class="col">
-        <button (click)="reset()" type="button" class="btn btn-info btn-lg">
+        <button (click)="handleReset(0)" type="button" class="btn btn-info btn-lg">
             Reset ( 0 )
         </button>    
     </div>
