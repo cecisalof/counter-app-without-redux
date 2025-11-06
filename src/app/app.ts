@@ -6,36 +6,45 @@ import * as actions from './Counter/counter.actions';
 import { selectCounter } from './Counter/counter.selectors';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Daughter } from './Counter/daughter/daughter';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, Daughter]
 })
 
 export class App implements OnInit{
   //Usamos un Observable tipado para la reactividad
   counter$!: Observable<number>;
+
   // AppState interface is passed to the store in the constructor to inicialized app state.
   constructor(private store: Store<AppState>) {
-    // this.counter= 20;
-    // this.store.select('counter).subscribe((counter) => {
-    //   this.counter = counter;
-    // })
   }
+
   ngOnInit(): void {
     this.counter$ = this.store.select(selectCounter)
   }
 
   increase (): void {
-    // this.counter = this.counter + 1;
     this.store.dispatch(actions.increment());
   }
 
   decrease (): void {
-    // this.counter = this.counter - 1;
     this.store.dispatch(actions.decrement());
   }
+
+  // // MANEJA EL EVENTO duplicateCounter DE DAUGTHER
+  // handleDuplicate(duplicateValue: number): void {
+  //   // Despachar la acción 'duplicate' (sin payload)
+  //   this.store.dispatch(actions.duplicate({number: duplicateValue})); 
+  // }
+
+  // // MANEJA EL EVENTO resetCounter de daugther
+  // handleReset(newCounterValue: number): void {
+  //   // Despachar la acción 'reset', enviando el payload
+  //   this.store.dispatch(actions.reset({ newCounter: newCounterValue })); 
+  // }
 }

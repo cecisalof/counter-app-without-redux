@@ -3,17 +3,13 @@
     <div class="row" style="text-align: center">
       <div class="col">
         <h1>Counter (Mother)</h1>
-        <h1>{{ counter$ | async }}</h1>
+        <h1>{{ counter$ | async}}</h1>
       </div>
     </div>
 
     <div class="row" style="text-align: center">
       <div class="col">
-        <button
-          (click)="increase()"
-          type="button"
-          class="btn btn-primary btn-lg"
-        >
+        <button (click)="increase()" type="button" class="btn btn-primary btn-lg">
           Increase ( +1 )
         </button>
       </div>
@@ -21,20 +17,14 @@
 
     <div class="row mt-2" style="text-align: center">
       <div class="col">
-        <button
-          (click)="decrease()"
-          type="button"
-          class="btn btn-success btn-lg"
-        >
+        <button (click)="decrease()" type="button" class="btn btn-success btn-lg">
           Decrease ( -1 )
         </button>
       </div>
     </div>
 
-    <!-- <hr />
     <hr />
-    <app-daughter [counter]="counter"
-    (changeCounter)="counter = $event">
-    </app-daughter> -->
+    <hr />
+    <app-daughter></app-daughter>
   </div>
 </div>
