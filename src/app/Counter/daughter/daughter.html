@@ -1,7 +1,7 @@
 <div class="row" style="text-align: center;">
     <div class="col">
         <h1>Counter (Daughter)</h1>
-        <h1>{{counter}}</h1>
+        <h1>{{ counter$ | async}}</h1>
     </div>
 </div>
 
@@ -15,6 +15,4 @@
 
 <hr />
 <hr />
-<app-grand-daughter [counter]="counter"
-(changeCounter)="resetGrandDaughter($event)">
-</app-grand-daughter>
+<app-grand-daughter></app-grand-daughter>

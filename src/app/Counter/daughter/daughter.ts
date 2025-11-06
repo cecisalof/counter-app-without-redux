@@ -1,31 +1,32 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { selectCounter } from '../counter.selectors';
 import { GrandDaughter } from "../grand-daughter/grand-daughter";
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.reducer';
+import * as actions from '../counter.actions'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-daughter',
-  imports: [GrandDaughter],
+  imports: [CommonModule,GrandDaughter],
   standalone: true,
   templateUrl: './daughter.html',
   styleUrl: './daughter.scss',
 })
 export class Daughter implements OnInit{
-  @Input() counter!: number;
-  @Output() changeCounter = new EventEmitter<number>();
+  //Usamos un Observable tipado para la reactividad
+    counter$!: Observable<number>;
+  // @Output() duplicateCounter = new EventEmitter<void>();
+  // @Output() resetCounter = new EventEmitter<number>();
 
-  constructor() {
+  constructor(private store: Store<AppState>) {}
 
-  }
-
-  ngOnInit(): void {
-  }
+   ngOnInit(): void {
+      this.counter$ = this.store.select(selectCounter)
+    }
   
   duplicate(): void {
-    this.counter =this.counter * 2;
-    this.changeCounter.emit(this.counter)
-  }
-
-  resetGrandDaughter(newCounter: number): void {
-    this.counter = newCounter;
-    this.changeCounter.emit(this.counter)
+    this.store.dispatch(actions.duplicate({number: 2}))
   }
 }
